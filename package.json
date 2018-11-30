@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/taroukuma/Node-Project/issues"
   },
-  "homepage": "https://github.com/taroukuma/Node-Project#readme"
+  "homepage": "https://github.com/taroukuma/Node-Project#readme",
+  "dependencies": {
+    "express": "4.16.4",
+    "socket.io": "^2.2.0"
+  }
 }
