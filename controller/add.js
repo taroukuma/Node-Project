@@ -1,4 +1,4 @@
-import { pathToJson } from '../model/createJson'
+import { pathToJson, jsonData } from '../model/createJson'
 import { socketIO } from '../server'
 
 let express = require('express')

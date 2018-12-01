@@ -4,6 +4,9 @@ let path = require('path')
 // Define path to the JSON file
 let pathToJson = path.resolve('jsonFile.json')
 
+// The JSON object
+let jsonData = {}
+
 // Function that creates the JSON file
 let createFile = function () {
   fs.writeFile(pathToJson, '', function (err) {
@@ -15,4 +18,4 @@ let createFile = function () {
   })
 }
 
-export { pathToJson, createFile }
+export { jsonData, pathToJson, createFile }
