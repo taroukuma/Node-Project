@@ -62,11 +62,6 @@ app.get('/getValueOf', function (req, res) {
   }
 })
 
-// The update channel aka the home page
-app.get('/', function (req, res) {
-  res.sendFile(path.resolve('views/index.html'))
-})
-
 // Reject invalid requests
 app.all('/*', function (req, res) {
   res.status(400).send({ message: 'Invalid request!' })
