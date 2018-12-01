@@ -2,6 +2,10 @@
 let express = require('express');
 let app = express();
 
+// Socket.io imports
+let server = require('http').Server(app);
+let socketIO = require('socket.io')(server);
+
 // The data object
 let jsonData = {};
 
@@ -21,11 +25,6 @@ fs.readFile(__dirname + '/jsonFile.json', 'utf8', function (err, data) {
 
 // Routes
 
-// Home page
-app.get('/', function (req, res) {
-    res.sendFile(__dirname +'/views/index.html');
-});
-
 // Add to the jsonData
 app.get('/add', function (req, res) {
     // Get the query string
@@ -40,8 +39,9 @@ app.get('/add', function (req, res) {
         // Update the JSON file
         fs.writeFile(__dirname + '/jsonFile.json', JSON.stringify(jsonData), function () {console.log('JSON file updated.')})
 
-        // Redirect to home page
-        res.redirect('/');
+        // Send a success message and emit a socket event
+        res.send("Successfully added.")
+        socketIO.emit('update', JSON.stringify(jsonData));
     }
     else {
         res.status(400).send({message: 'Please provide a key and a value!'});
@@ -63,7 +63,12 @@ app.get('/getValueOf', function (req, res) {
     }
 });
 
+// The update channel aka the home page
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/views/index.html');
+});
+
 // Start the server
-app.listen(3000, function () {
+server.listen(3000, function () {
     console.log('Listening on port 3000');
 });

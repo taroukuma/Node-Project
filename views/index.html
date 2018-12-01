@@ -3,7 +3,20 @@
 <head>
     <title>Node app</title>
 </head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+    let socket = io();
+    socket.on('update', function (jsonData) {
+        console.log('recieved');
+        $('#msgBox').text(jsonData);
+    });
+</script>
 <body>
-    <h1>Hello World!</h1>
+    <h1>Welcome to the node app!</h1>
+    <h3>This page updates as changes are made on the json file.</h3>
+
+    <div id="msgBox"></div>
 </body>
 </html>
