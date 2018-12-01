@@ -12,13 +12,15 @@ let jsonData = {}
 
 // Read data from json file
 let fs = require('fs')
-fs.readFile(__dirname + '/jsonFile.json', 'utf8', function (err, data) {
+let pathToJson = path.resolve(__dirname, 'jsonFile.json')
+
+fs.readFile(pathToJson, 'utf8', function (err, data) {
   // Populate jsonData if the file exits
   if (!err) {
     jsonData = JSON.parse(data)
   // If no file exits, create it
   } else {
-    fs.writeFile(__dirname + '/jsonFile.json', '', function () { console.log('New JSON file created.') })
+    fs.writeFile(pathToJson, '', function () { console.log('New JSON file created.') })
   }
 })
 
@@ -36,8 +38,7 @@ app.get('/add', function (req, res) {
     jsonData[key] = val
 
     // Update the JSON file
-    let pathUrl = path.resolve(__dirname + '/..', __dirname + 'views/jsonFile.json')
-    fs.writeFile(pathUrl, JSON.stringify(jsonData), function () { console.log('JSON file updated.') })
+    fs.writeFile(pathToJson, JSON.stringify(jsonData), function () { console.log('JSON file updated.') })
 
     // Send a success message and emit a socket event
     res.send('Successfully added.')
@@ -63,7 +64,7 @@ app.get('/getValueOf', function (req, res) {
 
 // The update channel aka the home page
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/index.html')
+  res.sendFile(path.resolve(__dirname, '/views/index.html'))
 })
 
 // Reject invalid requests
