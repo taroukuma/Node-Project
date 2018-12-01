@@ -12,8 +12,6 @@ let app = express()
 let server = require('http').Server(app)
 let socketIO = require('socket.io')(server)
 
-// The data object
-// global.jsonData = {}
 // Create JSON file
 createFile()
 
