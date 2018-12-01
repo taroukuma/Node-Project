@@ -42,19 +42,9 @@ app.get('/add', function (req, res) {
   }
 })
 
-// Retrieve data from the jsonData
-app.get('/getValueOf', function (req, res) {
-  // Get the query string
-  let key = req.query.key
-  let val = jsonData[key]
-
-  // Validation check
-  if (val) {
-    res.send(val)
-  } else {
-    res.status(404).send({ message: 'Could not find the key!' })
-  }
-})
+// Retrieve value given a key in the JSON file
+import getValueRouter from './controller/getValue'
+app.use('/getvalue', getValueRouter)
 
 // Home page
 import homeRouter from './controller/home'
