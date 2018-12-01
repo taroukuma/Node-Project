@@ -10,18 +10,12 @@ let socketIO = require('socket.io')(server)
 // The data object
 global.jsonData = {}
 
-// Read data from json file
+// Create JSON file
 let fs = require('fs')
 let pathToJson = path.resolve('jsonFile.json')
 
 fs.readFile(pathToJson, 'utf8', function (err, data) {
-  // Populate jsonData if the file exits
-  if (!err) {
-    jsonData = JSON.parse(data)
-  // If no file exits, create it
-  } else {
     fs.writeFile(pathToJson, '', function () { console.log('New JSON file created.') })
-  }
 })
 
 // Routes
@@ -61,6 +55,10 @@ app.get('/getValueOf', function (req, res) {
     res.status(404).send({ message: 'Could not find the key!' })
   }
 })
+
+// Home page
+import homeRouter from './controller/home'
+app.use('/', homeRouter)
 
 // Reject invalid requests
 app.all('/*', function (req, res) {

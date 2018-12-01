@@ -1,6 +1,11 @@
-import {app} from '../server'
+// Express and path imports
+let express = require('express');
+let homeRouter = express.Router();
+let path = require('path')
 
 // The update channel aka the home page
-app.get('/', function (req, res) {
+homeRouter.get('/', function (req, res) {
     res.sendFile(path.resolve('views/index.html'))
 })
+
+export default homeRouter
