@@ -7,7 +7,9 @@
     "lint": "eslint --fix ./",
     "test": "test",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./package-lock.json,./.gitignore,./README.md,./node_modules,./.babelrc,./package.json, --copy-files",
-    "start": "npm run build && node dist/server.js && rimraf dist/"
+    "start": "npm run build && node dist/server.js && rimraf dist/",
+    "clean": "rimraf dist/"
+
   },
   "repository": {
     "type": "git",
