@@ -8,11 +8,11 @@ let server = require('http').Server(app)
 let socketIO = require('socket.io')(server)
 
 // The data object
-let jsonData = {}
+global.jsonData = {}
 
 // Read data from json file
 let fs = require('fs')
-let pathToJson = path.resolve(__dirname, 'jsonFile.json')
+let pathToJson = path.resolve('jsonFile.json')
 
 fs.readFile(pathToJson, 'utf8', function (err, data) {
   // Populate jsonData if the file exits
@@ -76,3 +76,6 @@ app.all('/*', function (req, res) {
 server.listen(3000, function () {
   console.log('Listening on port 3000')
 })
+
+// Export app
+export {app}
