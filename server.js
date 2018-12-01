@@ -1,17 +1,10 @@
-// Create an express app
-// Create JSON file
+// Import routes and helper functions
 import { createFile } from './model/createJson'
-
-// Routes
-// Add to the jsonData
 import addRouter from './controller/add'
-
-// Retrieve value given a key in the JSON file
 import getValueRouter from './controller/getValue'
-
-// Home page
 import homeRouter from './controller/home'
 
+// Create an express app
 let express = require('express')
 let app = express()
 
@@ -21,9 +14,15 @@ let socketIO = require('socket.io')(server)
 
 // The data object
 global.jsonData = {}
+// Create JSON file
 createFile()
+
+// Routes
+// Add to the jsonData
 app.use('/add', addRouter)
+// Retrieve value given a key in the JSON file
 app.use('/getvalue', getValueRouter)
+// Home page
 app.use('/', homeRouter)
 
 // Reject invalid requests
