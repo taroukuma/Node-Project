@@ -1,8 +1,8 @@
 // Import routes and helper functions
 import { createFile } from './model/createJson'
-import addRouter from './controller/add'
-import getValueRouter from './controller/getValue'
-import homeRouter from './controller/home'
+import { addRouter } from './controller/add'
+import { getValueRouter } from './controller/getValue'
+import { homeRouter } from './controller/home'
 
 // Create an express app
 let express = require('express')
