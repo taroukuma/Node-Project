@@ -1,5 +1,5 @@
 // Import routes and helper functions
-import { createFile } from './model/createJson'
+import { createFile, writeFile } from './model/createJson'
 import { addCallback } from './controller/add'
 import { getValueCallback } from './controller/getValue'
 import { homeCallback } from './controller/home'
@@ -23,7 +23,7 @@ app.get('/getValue', getValueCallback)
 // Add to the jsonData
 // socketCall closure emits an event to the clients
 app.get('/add', function (req, res) {
-  addCallback(req, res, socketCall(socketIO))
+  addCallback(req, res, socketCall(socketIO), writeFile)
 })
 
 // Home page

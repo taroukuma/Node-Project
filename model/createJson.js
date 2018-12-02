@@ -18,4 +18,9 @@ let createFile = function () {
   })
 }
 
-export { jsonData, pathToJson, createFile }
+// Function that write the JSON file and updates it
+let writeFile = function () {
+    fs.writeFile(pathToJson, JSON.stringify(jsonData), function () { console.log('JSON file updated.') })
+}
+
+export { jsonData, pathToJson, createFile, writeFile }

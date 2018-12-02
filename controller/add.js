@@ -1,9 +1,7 @@
-import { pathToJson, jsonData } from '../model/createJson'
-
-let fs = require('fs')
+import { jsonData } from '../model/createJson'
 
 // The callback
-let addCallback = function (req, res, socketCall) {
+let addCallback = function (req, res, socketCall, writeFile) {
     // Get the query string
     let key = req.query.key
     let val = req.query.val
@@ -14,8 +12,8 @@ let addCallback = function (req, res, socketCall) {
       jsonData[key] = val
   
       // Update the JSON file
-      fs.writeFile(pathToJson, JSON.stringify(jsonData), function () { console.log('JSON file updated.') })
-  
+      writeFile()
+      
       // Send a success message and emit a socket event
       res.status(200).send('Successfully added.')
       socketCall()

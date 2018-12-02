@@ -68,4 +68,46 @@ describe('Testing all the route callbacks', function () {
         expect(res.statusCode).to.equal(200)
         expect(res.statusMsg).to.equal('someValue')
     })
+
+    // add route
+    it('add route should give status 400 if a key is not given but a value is', function () {
+        req.query['val'] = 'someValue'
+
+        addCallback(req, res)
+        expect(res.statusCode).to.equal(400)
+        expect(res.statusMsg).to.equal('Please provide a key and a value!')
+    })
+    it('add route should give status 400 if a value is given but a key is not', function () {
+        req.query['key'] = 'someKey'
+
+        addCallback(req, res)
+        expect(res.statusCode).to.equal(400)
+        expect(res.statusMsg).to.equal('Please provide a key and a value!')
+    })
+    it('add route should give status 400 if neither a value nor a key is given', function () {
+        addCallback(req, res)
+        expect(res.statusCode).to.equal(400)
+        expect(res.statusMsg).to.equal('Please provide a key and a value!')
+    })
+    it('add route should add a key and a value to jsonData, write to file, and make socket call if the key and the value are given', function () {
+        req.query['key'] = 'someKey'
+        req.query['val'] = 'someValue'
+
+        let socketMsg = ''
+        let socketCall = function () {
+            socketMsg = 'event emitted'
+        }
+
+        let writeMsg = ''
+        let writeFile = function () {
+            writeMsg = 'JSON file written'
+        }
+
+        addCallback(req, res, socketCall, writeFile)
+        expect(res.statusCode).to.equal(200)
+        expect(res.statusMsg).to.equal('Successfully added.')
+        expect(socketMsg).to.equal('event emitted')
+        expect(writeMsg).to.equal('JSON file written')
+    })
+
 })
