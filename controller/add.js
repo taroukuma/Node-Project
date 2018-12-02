@@ -1,13 +1,10 @@
 import { pathToJson, jsonData } from '../model/createJson'
 import { socketIO } from '../server'
 
-let express = require('express')
-let addRouter = express.Router()
-
 let fs = require('fs')
 
 // The callback
-let addCallback = function (req, res) {
+let addCallback = function (req, res, socketCall) {
     // Get the query string
     let key = req.query.key
     let val = req.query.val
@@ -22,12 +19,10 @@ let addCallback = function (req, res) {
   
       // Send a success message and emit a socket event
       res.status(200).send('Successfully added.')
-      socketIO.emit('update', JSON.stringify(jsonData))
+      socketCall()
     } else {
       res.status(400).send('Please provide a key and a value!')
     }
 }
 
-addRouter.get('/', addCallback)
-
-export { addRouter, addCallback }
+export { addCallback }

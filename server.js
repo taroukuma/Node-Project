@@ -1,8 +1,9 @@
 // Import routes and helper functions
 import { createFile } from './model/createJson'
-import { addRouter } from './controller/add'
-import { getValueRouter } from './controller/getValue'
-import { homeRouter } from './controller/home'
+import { addCallback } from './controller/add'
+import { getValueCallback } from './controller/getValue'
+import { homeCallback } from './controller/home'
+import { socketCall } from "./model/socketLogic";
 
 // Create an express app
 let express = require('express')
@@ -16,12 +17,14 @@ let socketIO = require('socket.io')(server)
 createFile()
 
 // Routes
-// Add to the jsonData
-app.use('/add', addRouter)
 // Retrieve value given a key in the JSON file
-app.use('/getvalue', getValueRouter)
+app.get('/getValue', getValueCallback)
+// Add to the jsonData
+app.get('/add', function (req, res) {
+  addCallback(req, res, socketCall(socketIO))
+})
 // Home page
-app.use('/', homeRouter)
+app.get('/', homeCallback)
 
 // Reject invalid requests
 app.all('/*', function (req, res) {
@@ -34,4 +37,4 @@ server.listen(3000, function () {
 })
 
 // Export
-export { app, socketIO }
+export { socketIO }

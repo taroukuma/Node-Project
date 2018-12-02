@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint --fix ./",
-    "test": "test",
+    "test": "npm run build && mocha dist/tests/controller/routes.test.js",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./package-lock.json,./.gitignore,./README.md,./node_modules,./.babelrc,./package.json, --copy-files",
-    "start": "npm run build && node dist/server.js && rimraf dist/",
+    "start": "npm run build && node dist/server.js",
     "clean": "rimraf dist/"
   },
   "repository": {
