@@ -60,4 +60,12 @@ describe('Testing all the route callbacks', function () {
         expect(res.statusCode).to.equal(404)
         expect(res.statusMsg).to.equal('Could not find the key!')
     })
+    it('getValue route should give status 200 and the value for the given key if the key exists', function () {
+        req.query['key'] = 'someKey'
+        jsonData['someKey'] = 'someValue'
+
+        getValueCallback(req, res)
+        expect(res.statusCode).to.equal(200)
+        expect(res.statusMsg).to.equal('someValue')
+    })
 })
