@@ -1,5 +1,4 @@
 import { pathToJson, jsonData } from '../model/createJson'
-import { socketIO } from '../server'
 
 let fs = require('fs')
 

@@ -19,10 +19,13 @@ createFile()
 // Routes
 // Retrieve value given a key in the JSON file
 app.get('/getValue', getValueCallback)
+
 // Add to the jsonData
+// socketCall closure emits an event to the clients
 app.get('/add', function (req, res) {
   addCallback(req, res, socketCall(socketIO))
 })
+
 // Home page
 app.get('/', homeCallback)
 
@@ -31,10 +34,8 @@ app.all('/*', function (req, res) {
   res.status(400).send({ message: 'Invalid request!' })
 })
 
+
 // Start the server
 server.listen(3000, function () {
   console.log('Listening on port 3000')
 })
-
-// Export
-export { socketIO }

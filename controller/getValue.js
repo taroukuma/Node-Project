@@ -4,13 +4,18 @@ import { jsonData } from '../model/createJson'
 let getValueCallback = function (req, res) {
     // Get the query string
     let key = req.query.key
+    // If no key is given, send status 400
+    if (!key) {
+        return res.status(400).send('No key provided!')
+    }
+
     let val = jsonData[key]
   
     // Validation check
     if (val) {
-      res.status(200).send(val)
+      return res.status(200).send(val)
     } else {
-      res.status(404).send('Could not find the key!')
+      return res.status(404).send('Could not find the key!')
     }
 }
 
