@@ -3,7 +3,7 @@ import { createFile, writeFile } from './model/createJson'
 import { addCallback } from './controller/add'
 import { getValueCallback } from './controller/getValue'
 import { homeCallback } from './controller/home'
-import { socketCall } from "./model/socketLogic";
+import { socketCall } from './model/socketLogic'
 
 // Create an express app
 let express = require('express')
@@ -33,7 +33,6 @@ app.get('/', homeCallback)
 app.all('/*', function (req, res) {
   res.status(400).send({ message: 'Invalid request!' })
 })
-
 
 // Start the server
 server.listen(3000, function () {

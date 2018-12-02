@@ -1,7 +1,7 @@
-import { jsonData } from "./createJson";
+import { jsonData } from './createJson'
 
 let socketCall = function (socketIO) {
-    return () => socketIO.emit('update', JSON.stringify(jsonData))
+  return () => socketIO.emit('update', JSON.stringify(jsonData))
 }
 
-export {socketCall}
+export { socketCall }
