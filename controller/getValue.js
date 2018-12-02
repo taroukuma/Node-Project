@@ -11,9 +11,9 @@ getValueRouter.get('/', function (req, res) {
 
   // Validation check
   if (val) {
-    res.send(val)
+    res.status(200).send(val)
   } else {
-    res.status(404).send({ message: 'Could not find the key!' })
+    res.status(404).send('Could not find the key!')
   }
 })
 

@@ -20,10 +20,10 @@ addRouter.get('/', function (req, res) {
     fs.writeFile(pathToJson, JSON.stringify(jsonData), function () { console.log('JSON file updated.') })
 
     // Send a success message and emit a socket event
-    res.send('Successfully added.')
+    res.status(200).send('Successfully added.')
     socketIO.emit('update', JSON.stringify(jsonData))
   } else {
-    res.status(400).send({ message: 'Please provide a key and a value!' })
+    res.status(400).send('Please provide a key and a value!')
   }
 })
 
